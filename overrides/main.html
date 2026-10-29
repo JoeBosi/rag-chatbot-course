@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{#- Open Graph su ogni pagina, dati strutturati Course solo in home. -#}
+{% block extrahead %}
+  {% set descr = page.meta.description if page and page.meta and page.meta.description else config.site_description %}
+  {% if page and page.is_homepage %}
+    {% set titolo = config.site_name %}
+  {% else %}
+    {% set titolo = page.title ~ " - " ~ config.site_name %}
+  {% endif %}
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="{{ config.site_name | e }}">
+  <meta property="og:title" content="{{ titolo | striptags | e }}">
+  <meta property="og:description" content="{{ descr | e }}">
+  {% if page and page.canonical_url %}<meta property="og:url" content="{{ page.canonical_url }}">{% endif %}
+  <meta name="twitter:card" content="summary">
+  <meta name="author" content="Giuseppe Bosi">
+  {% if page and page.is_homepage %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": {{ config.site_name | tojson }},
+    "description": {{ config.site_description | tojson }},
+    "url": {{ config.site_url | tojson }},
+    "inLanguage": "it",
+    "isAccessibleForFree": true,
+    "timeRequired": "PT20H",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "author": {
+      "@type": "Person",
+      "name": "Giuseppe Bosi",
+      "honorificPrefix": "Prof.",
+      "jobTitle": "Professore di Scienze e Tecnologie Informatiche",
+      "hasCredential": "Dottore in Ingegneria Elettronica (V.O.)",
+      "url": "https://www.giuseppebosi.com",
+      "sameAs": ["https://www.linkedin.com/in/giuseppebosi"]
+    },
+    "provider": {
+      "@type": "Person",
+      "name": "Giuseppe Bosi",
+      "url": "https://www.giuseppebosi.com"
+    },
+    "hasCourseInstance": {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "courseWorkload": "PT20H"
+    },
+    "offers": {
+      "@type": "Offer",
+      "category": "Free",
+      "price": 0,
+      "priceCurrency": "EUR"
+    }
+  }
+  </script>
+  {% endif %}
+{% endblock %}

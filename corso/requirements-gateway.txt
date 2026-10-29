@@ -1,0 +1,14 @@
+# Dipendenze del SOLO gateway, da installare in un ambiente virtuale
+# separato (.venv-gateway). Vedi moduli/02-chiavi-gateway-e-quote/LAB.md.
+#
+# Perche' separato e non insieme al resto?
+# Perche' cognee 1.6.0 pretende litellm < 1.97, e il server proxy di
+# litellm 1.96 non parte con le versioni attuali di FastAPI. Sono due
+# programmi diversi: la libreria che cognee usa dentro di se', e il
+# server che fa da gateway. Tenerli in due ambienti separati e' la cosa
+# giusta da fare comunque: un servizio che gira per conto suo non deve
+# condividere le dipendenze con la tua applicazione.
+#
+# Verificato il 20/09/2026.
+
+litellm[proxy]==1.102.0

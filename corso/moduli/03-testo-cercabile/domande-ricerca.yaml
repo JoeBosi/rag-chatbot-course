@@ -1,0 +1,44 @@
+# Domande per confrontare i tre modi di cercare.
+# "atteso" e' il documento che DEVE comparire fra i primi risultati.
+# Le domande sono scelte apposta: alcune premiano le parole, altre il
+# significato, e nessun metodo da solo le prende tutte.
+
+- domanda: "Che candela monta il rasaerba?"
+  atteso: manuali/greencut-rm46.md
+  nota: parole in comune, facile per tutti
+
+- domanda: "Il tagliaerba non si accende, cosa controllo?"
+  atteso: manuali/greencut-rm46.md
+  nota: la parola tagliaerba non compare da nessuna parte, serve il significato
+
+- domanda: "La lavabiancheria lascia l'acqua dentro al cestello"
+  atteso: manuali/lavanor-wm700.md
+  nota: sinonimo, come sopra
+
+- domanda: "Cosa vuol dire il codice F03?"
+  atteso: manuali/lavanor-wm700.md
+  nota: codice esatto, terreno della ricerca lessicale
+
+- domanda: "Cosa vuol dire il codice E4?"
+  atteso: manuali/termovex-tx24.md
+  nota: codice esatto e corto, dove la semantica confonde E4 con F03
+
+- domanda: "Con che coppia si stringe il bullone della lama?"
+  atteso: manuali/greencut-rm46.md
+  nota: il valore 45 Nm e' raro, ma bullone e stringe tirano verso la bici
+
+- domanda: "Perche' il trapano avvitatore si scarica subito?"
+  atteso: note/2026-05-18-avvitatore-batteria.md
+  nota: la parola scarica significa due cose diverse nel corpus
+
+- domanda: "Quando ho spurgato i freni della bici?"
+  atteso: note/2026-06-07-bici-freno-spugnoso.md
+  nota: parola tecnica presente, facile
+
+- domanda: "A che pressione devo tenere l'impianto di riscaldamento?"
+  atteso: note/2026-08-30-caldaia-manutenzione.md
+  nota: il manuale dice 1,2 e la nota dice 1,4, il recupero deve portare la nota
+
+- domanda: "Ho trovato delle monete dentro l'elettrodomestico"
+  atteso: note/2026-04-02-lavatrice-f03.md
+  nota: la parola elettrodomestico non compare, solo il significato lo porta li'

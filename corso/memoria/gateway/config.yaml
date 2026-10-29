@@ -1,0 +1,98 @@
+# Il gateway: un solo indirizzo davanti a tutti i fornitori.
+#
+# Si avvia cosi', dalla radice del repository:
+#     litellm --config memoria/gateway/config.yaml --port 4000
+#
+# Da quel momento tutto il tuo codice parla con http://localhost:4000/v1
+# e non sa piu' quale fornitore stia rispondendo. Quando uno esaurisce la
+# quota, il gateway passa al successivo da solo.
+#
+# Le chiavi NON stanno qui dentro: "os.environ/NOME" dice a LiteLLM di
+# leggerle dall'ambiente, cioe' dal tuo .env. Questo file puo' finire su
+# Git senza pericolo.
+
+model_list:
+
+  # --- il cavallo da tiro: risponde alle domande e estrae le entita' ---
+  - model_name: memoria-veloce
+    litellm_params:
+      model: groq/openai/gpt-oss-120b
+      api_key: os.environ/GROQ_API_KEY
+      # NON mettere qui rpm/tpm se hai un fornitore solo. Il gateway li
+      # fa rispettare rifiutando le TUE richieste con "No deployments
+      # available for selected model", e chi sta dall'altra parte lo
+      # legge come un limite di servizio e aspetta un minuto per niente.
+      # Con due o piu' fornitori, invece, servono: dicono al gateway
+      # quando e' ora di passare al successivo.
+      # rpm: 28
+      # tpm: 7500
+
+  # --- prima riserva: quando Groq dice 429 ---
+  - model_name: riserva-1
+    litellm_params:
+      model: gemini/gemini-3.5-flash
+      api_key: os.environ/GEMINI_API_KEY
+
+  # --- seconda riserva: poche richieste al giorno, ultimo anello ---
+  - model_name: riserva-2
+    litellm_params:
+      model: openrouter/meta-llama/llama-3.3-70b-instruct:free
+      api_key: os.environ/OPENROUTER_API_KEY
+
+  # --- testi lunghi: un manuale intero in un colpo solo ---
+  - model_name: memoria-lunga
+    litellm_params:
+      model: gemini/gemini-3.5-flash
+      api_key: os.environ/GEMINI_API_KEY
+
+  # --- occhi: descrive le foto e legge i PDF scansionati ---
+  - model_name: memoria-occhi
+    litellm_params:
+      model: gemini/gemini-3.5-flash
+      api_key: os.environ/GEMINI_API_KEY
+
+  # --- orecchie: trascrive le note vocali ---
+  - model_name: memoria-orecchie
+    litellm_params:
+      model: groq/whisper-large-v3-turbo
+      api_key: os.environ/GROQ_API_KEY
+    model_info:
+      mode: audio_transcription
+
+router_settings:
+  # La catena di riserve, nell'ordine. E' il cuore di tutto il modulo:
+  # se "memoria-veloce" fallisce, LiteLLM riprova da solo su riserva-1,
+  # poi su riserva-2, senza che il tuo codice se ne accorga.
+  #
+  # REGOLA DA NON SALTARE: elenca qui SOLO le riserve di cui hai davvero
+  # la chiave. Una riserva senza chiave e' peggio di nessuna riserva:
+  # a ogni errore il gateway ci prova comunque, si prende un 401, e hai
+  # aggiunto due tentativi falliti a ogni singola richiesta andata male.
+  # Se hai solo la chiave Groq, commenta le due righe di riserva qui
+  # sotto e l'elenco "riserva-1"/"riserva-2" piu' in alto.
+  fallbacks:
+    # Su QUESTA macchina c'e' solo la chiave Groq: le riserve sono
+    # commentate, secondo la regola qui sopra.
+    # - memoria-veloce: ["riserva-1", "riserva-2"]
+    - memoria-lunga: ["memoria-veloce"]
+  # Quante volte ritentare sullo stesso fornitore prima di cambiare.
+  num_retries: 1
+  # Se un fornitore da' 429, mettilo in panchina per un minuto.
+  # Quanto tiene un fornitore in panchina dopo i fallimenti. Con un solo
+  # fornitore attivo un valore alto e' un autogol: il gateway risponde
+  # "nessun deployment disponibile" invece di riprovare. Tienilo corto.
+  cooldown_time: 10
+  # Quanti errori prima della panchina. Sui piani gratuiti un 429 ogni
+  # tanto e' normale, non e' un fornitore rotto: non bastano tre.
+  allowed_fails: 3
+
+litellm_settings:
+  # I fornitori non accettano tutti gli stessi parametri. Invece di
+  # rompersi, LiteLLM butta via quelli che il fornitore non conosce.
+  drop_params: true
+  request_timeout: 120
+
+general_settings:
+  # Password del gateway: impedisce che altri programmi sul tuo computer
+  # usino le tue chiavi. Sta in .env come GATEWAY_KEY.
+  master_key: os.environ/GATEWAY_KEY

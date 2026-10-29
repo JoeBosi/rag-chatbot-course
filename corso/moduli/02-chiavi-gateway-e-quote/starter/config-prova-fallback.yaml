@@ -1,0 +1,29 @@
+# Configurazione usa-e-getta per VEDERE il fallback scattare, anche se hai
+# una chiave sola.
+#
+# Il trucco: il primo anello punta a un modello che non esiste, quindi
+# fallisce sempre. Il secondo anello e' un modello vero. Se la risposta
+# arriva lo stesso, vuol dire che la catena ha funzionato.
+#
+#   .venv-gateway/bin/litellm \
+#     --config moduli/02-chiavi-gateway-e-quote/starter/config-prova-fallback.yaml \
+#     --port 4000
+
+model_list:
+  - model_name: memoria-veloce
+    litellm_params:
+      model: groq/questo-modello-non-esiste
+      api_key: os.environ/GROQ_API_KEY
+
+  - model_name: riserva-1
+    litellm_params:
+      model: groq/openai/gpt-oss-20b
+      api_key: os.environ/GROQ_API_KEY
+
+router_settings:
+  fallbacks:
+    - memoria-veloce: ["riserva-1"]
+  num_retries: 0
+
+general_settings:
+  master_key: os.environ/GATEWAY_KEY

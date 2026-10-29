@@ -1,0 +1,44 @@
+# Corso "Costruisci la tua memoria AI"
+# Versioni bloccate e collaudate il 20/09/2026 su Python 3.12 (Ubuntu 24.04 e macOS 14).
+# Se sblocchi le versioni il corso puo' smettere di funzionare: cognee cambia API spesso.
+
+# --- motore di memoria (si porta dietro kuzu, lancedb, fastembed, litellm) ---
+cognee==1.6.0
+
+# --- il gateway NON si installa qui ---
+# Il server proxy di LiteLLM va in un ambiente separato: vedi
+# requirements-gateway.txt e il modulo 2. La libreria litellm che cognee
+# usa internamente e' gia' inclusa da cognee.
+
+# --- lettura dei PDF (modulo 3 e progetto finale) ---
+pypdf==6.19.0
+
+# --- variabili d'ambiente da .env ---
+python-dotenv==1.2.3
+
+# --- chiamate HTTP diritte (modulo 2: leggere gli header di quota) ---
+httpx==0.28.1
+
+# --- lettura dei file .yaml (moduli 3 e 8, insieme di valutazione) ---
+# Arriva gia' con cognee, ma va dichiarato: se domani cognee smette di
+# dipenderne, il corso si rompe senza che tu capisca perche'.
+PyYAML==6.0.3
+
+# --- il tokenizzatore del modello di embedding (moduli 3 e 5) ---
+# Senza questo, cognee conta i token con TikToken, che e' il
+# tokenizzatore di OpenAI e non c'entra niente col modello di embedding
+# che usiamo. Il conteggio serve a decidere quanto lunghi fare i pezzi:
+# sbagliarlo vuol dire pezzi piu' lunghi dei 512 token che il modello
+# regge, e il testo in eccesso viene troncato senza dirtelo.
+# Si installa senza PyTorch: servono solo i tokenizzatori, non i modelli.
+transformers==4.57.1
+
+# --- modulo 6: PostgreSQL + pgvector ---
+# Decommenta quando arrivi al modulo 6. Usa "postgres-binary", non
+# "postgres": il primo installa psycopg2 gia' compilato, il secondo lo
+# compila e su macOS chiede la libreria libpq di sistema.
+# cognee[postgres-binary]==1.6.0
+
+# --- progetto finale: OCR in locale per i PDF scansionati ---
+# Alternativa a Gemini per chi non vuole mandare fuori le scansioni.
+# cognee[rapidocr]==1.6.0

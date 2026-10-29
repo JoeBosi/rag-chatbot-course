@@ -1,0 +1,21 @@
+# le chiavi non entrano mai nel repo
+.env
+corso/.env
+
+# ambienti
+.venv/
+.venv-gateway/
+__pycache__/
+*.pyc
+
+# generati
+build/
+site/
+corso/dati/
+
+# internal notes and server-specific files (not part of the course)
+REVISIONE-DIVULGAZIONE.md
+gateway-due-conti.yaml
+deploy/
+*.log
+.DS_Store

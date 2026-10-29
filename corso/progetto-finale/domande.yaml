@@ -1,0 +1,102 @@
+# Insieme di valutazione del "quaderno di officina".
+#
+# Ogni voce e' una domanda con la risposta attesa, e dice DOVE sta la
+# risposta: nel manuale, nelle note di intervento, o in tutti e due.
+#
+# "attese" sono i frammenti che DEVONO comparire nella risposta.
+# "vietate" sono i frammenti che NON devono comparire (tipicamente il
+#   fatto vecchio che e' stato superato).
+# "tipo: assente" significa che la risposta giusta e' "non lo so".
+#
+# Lo usano:  moduli/08-valutare-il-sistema/  e il progetto finale.
+
+- id: D01
+  domanda: "Cosa significa l'errore E4 sulla caldaia Termovex?"
+  fonte: manuale
+  tipo: fattuale
+  attese: ["pressione", "0,8"]
+
+- id: D02
+  domanda: "A che pressione devo tenere l'impianto della caldaia?"
+  fonte: note
+  tipo: aggiornato
+  attese: ["1,4"]
+  vietate: ["1,2 bar a freddo"]
+  perche: >
+    Il libretto dice 1,2 bar. La nota del 30 agosto 2026 alza il valore a
+    1,4 bar su indicazione del tecnico. Il sistema deve rispondere con il
+    fatto piu' recente, non con quello del manuale.
+
+- id: D03
+  domanda: "L'errore E4 e' tornato: cosa dice il libretto e cosa avevo trovato io?"
+  fonte: manuale+note
+  tipo: incrocio
+  attese: ["riempimento", "vaso di espansione"]
+
+- id: D04
+  domanda: "Qual e' il codice della cinghia della lavatrice e quando l'ho cambiata?"
+  fonte: manuale+note
+  tipo: incrocio
+  attese: ["1201J5", "settembre"]
+
+- id: D05
+  domanda: "Che candela monta il rasaerba e con che distanza elettrodi?"
+  fonte: manuale
+  tipo: ocr
+  attese: ["BPR6ES", "0,7"]
+  perche: >
+    Sta solo nel manuale del rasaerba, che e' un PDF scansionato. Se il
+    sistema non risponde, l'OCR non ha funzionato.
+
+- id: D06
+  domanda: "Con che coppia si stringe il bullone della lama del rasaerba?"
+  fonte: manuale+note
+  tipo: incrocio
+  attese: ["45"]
+
+- id: D07
+  domanda: "Perche' le pastiglie della bici fischiavano?"
+  fonte: note
+  tipo: fattuale
+  attese: ["olio"]
+
+- id: D08
+  domanda: "Quanto olio motore va nel rasaerba?"
+  fonte: manuale
+  tipo: ocr
+  attese: ["0,6", "SAE 30"]
+
+- id: D09
+  domanda: "Che batteria monta l'avvitatore e quando l'ho sostituita?"
+  fonte: manuale+note
+  tipo: incrocio
+  attese: ["FX-BAT20", "maggio"]
+
+- id: D10
+  domanda: "Qual e' la pressione di gonfiaggio dei pneumatici della bici?"
+  fonte: nessuna
+  tipo: assente
+  attese: ["non"]
+  perche: >
+    Non c'e' in nessun documento. La risposta giusta e' dire che non si sa.
+    Se il sistema inventa un numero, ha fallito.
+
+- id: D11
+  domanda: "Che olio va nei freni della bici?"
+  fonte: manuale
+  tipo: fattuale
+  attese: ["minerale"]
+  vietate: ["DOT"]
+
+- id: D12
+  domanda: "Quante ore ho passato in tutto sulla caldaia?"
+  fonte: note
+  tipo: multi-hop
+  attese: ["5,5"]
+  perche: >
+    Somma di tre interventi sulla caldaia: 1,5 ore il 12/03, 2 ore il
+    30/08 e 2 ore nella nota vocale del 12/09. Finche' la nota vocale non
+    e' stata trascritta e ingerita, la risposta giusta e' 3,5 ore.
+    E' la domanda che il RAG classico sbaglia quasi sempre: il numero non
+    sta scritto da nessuna parte, va ricostruito mettendo insieme note
+    diverse.

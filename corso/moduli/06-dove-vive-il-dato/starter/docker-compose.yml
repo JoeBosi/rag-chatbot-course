@@ -1,0 +1,35 @@
+# PostgreSQL con l'estensione pgvector, per il modulo 6.
+#
+#   docker compose -f memoria/docker-compose.yml up -d
+#   docker compose -f memoria/docker-compose.yml logs -f    (per guardare)
+#   docker compose -f memoria/docker-compose.yml down       (per fermare)
+#
+# I dati restano nel volume "dati_postgres": fermare il contenitore non
+# li cancella. Per cancellarli davvero: down -v.
+
+services:
+  postgres:
+    # L'immagine ufficiale di pgvector: e' Postgres piu' l'estensione
+    # gia' compilata. Senza, dovresti compilarla a mano.
+    image: pgvector/pgvector:pg17
+    container_name: memoria-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: cognee
+      POSTGRES_PASSWORD: cognee
+      POSTGRES_DB: cognee_db
+    ports:
+      # Solo su localhost: questo database non deve essere raggiungibile
+      # da fuori. La password e' "cognee": va bene per imparare, non per
+      # mettere un database su internet.
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - dati_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cognee -d cognee_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  dati_postgres:

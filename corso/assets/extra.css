@@ -1,0 +1,75 @@
+/* Aggiunte al tema Material. Nessuna risorsa esterna: solo regole. */
+
+/* --- Firma dell'autore nella barra in alto --------------------------
+   Una riga piccola SOTTO il titolo del corso: nessun riquadro, nessuno
+   sfondo, nessun bordo. Si sottolinea solo passandoci sopra.
+   La barra di Material e' gia' fissa: la firma resta con lei anche
+   scorrendo, su desktop e su telefono. */
+.md-header__title {
+  /* Material da' al titolo un'altezza fissa di 2,4rem con la riga alta
+     altrettanto: con due righe la seconda finirebbe tagliata. */
+  height: auto;
+  min-height: 2.4rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-block: .2rem;
+  line-height: 1.2;
+}
+
+.md-header__title .md-header__topic {
+  line-height: 1.2;
+}
+
+.md-header__title .md-ellipsis {
+  line-height: 1.2;
+}
+
+/* I due titoli che Material fa scorrere sono in posizione assoluta:
+   senza un'altezza propria il contenitore collassa e la firma finisce
+   sopra al titolo. */
+.md-header__title > .md-header__ellipsis {
+  width: 100%;
+  height: 1.4rem;
+  flex: 0 0 auto;
+}
+
+.gb-autore {
+  display: block;
+  margin: .05rem 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-size: .62rem;
+  font-weight: 400;
+  letter-spacing: .01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+  opacity: .8;
+}
+
+.gb-autore:hover,
+.gb-autore:focus-visible {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Sugli schermi stretti il titolo e' piu' corto: la firma resta leggibile. */
+@media screen and (max-width: 29.9375em) {
+  .gb-autore { font-size: .58rem; }
+  .md-header__title { min-width: 0; }
+}
+
+/* --- Piede di pagina ------------------------------------------------ */
+.gb-piede { line-height: 1.6; }
+
+.gb-piede a {
+  color: currentcolor;
+  text-decoration: underline;
+}
+
+.gb-piede__autore { font-weight: 700; }
+
+.gb-piede__riga { display: block; }

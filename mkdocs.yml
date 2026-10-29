@@ -1,0 +1,134 @@
+site_name: Costruisci la tua memoria AI
+site_description: Corso pratico di 20 ore su RAG, grafi di conoscenza e chatbot che ricordano. A costo zero.
+site_author: Giuseppe Bosi
+site_url: https://corso-rag.giuseppebosi.com/
+
+docs_dir: build/docs
+site_dir: site
+use_directory_urls: true
+
+theme:
+  name: material
+  language: it
+  custom_dir: overrides
+  # Nessun font da Google: il tema userebbe fonts.googleapis.com, cioe'
+  # una richiesta a terzi per ogni lettore. Con false usa i caratteri di
+  # sistema, e il sito non contatta nessuno.
+  font: false
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Passa al tema scuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Passa al tema chiaro
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      permalink_title: Collegamento a questa sezione
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+plugins:
+  - search:
+      lang: it
+
+extra_css:
+  - assets/extra.css
+
+extra:
+  # Il piede di pagina lo scriviamo noi in overrides/partials/copyright.html
+  generator: false
+  social:
+    - icon: material/school
+      link: https://corso-rag.giuseppebosi.com/
+      name: Costruisci la tua memoria AI
+
+
+nav:
+  - Il corso: index.md
+  - Prima di cominciare:
+      - Preparare il computer: SETUP.md
+      - Prendere le chiavi: CHIAVI.md
+      - Glossario: GLOSSARIO.md
+  - I moduli:
+      - "1 — Perché serve una memoria":
+          - "Modulo 1: Perché serve una memoria": moduli/01-perche-serve-una-memoria/LEZIONE.md
+          - "Modulo 1: laboratorio": moduli/01-perche-serve-una-memoria/LAB.md
+      - "2 — Chiavi, gateway e quote":
+          - "Modulo 2: Chiavi, gateway e quote": moduli/02-chiavi-gateway-e-quote/LEZIONE.md
+          - "Modulo 2: laboratorio": moduli/02-chiavi-gateway-e-quote/LAB.md
+      - "3 — Come un testo diventa cercabile":
+          - "Modulo 3: Come un testo diventa cercabile": moduli/03-testo-cercabile/LEZIONE.md
+          - "Modulo 3: laboratorio": moduli/03-testo-cercabile/LAB.md
+      - "4 — Dal recupero al grafo":
+          - "Modulo 4: Dal recupero al grafo": moduli/04-dal-recupero-al-grafo/LEZIONE.md
+          - "Modulo 4: laboratorio": moduli/04-dal-recupero-al-grafo/LAB.md
+      - "5 — La pipeline di cognee":
+          - "Modulo 5: La pipeline di cognee": moduli/05-la-pipeline-di-cognee/LEZIONE.md
+          - "Modulo 5: laboratorio": moduli/05-la-pipeline-di-cognee/LAB.md
+      - "6 — Dove vive il dato":
+          - "Modulo 6: Dove vive il dato": moduli/06-dove-vive-il-dato/LEZIONE.md
+          - "Modulo 6: laboratorio": moduli/06-dove-vive-il-dato/LAB.md
+      - "7 — Manutenzione della memoria":
+          - "Modulo 7: Manutenzione della memoria": moduli/07-manutenzione-della-memoria/LEZIONE.md
+          - "Modulo 7: laboratorio": moduli/07-manutenzione-della-memoria/LAB.md
+      - "8 — Valutare il proprio sistema":
+          - "Modulo 8: Valutare il proprio sistema": moduli/08-valutare-il-sistema/LEZIONE.md
+          - "Modulo 8: laboratorio": moduli/08-valutare-il-sistema/LAB.md
+  - Progetto finale:
+      - Il brief: progetto-finale/BRIEF.md
+      - Come ti valuti: progetto-finale/RUBRICA.md
+      - Il corpus di partenza:
+          - "Caldaia Termovex TX-24": progetto-finale/corpus/manuali/termovex-tx24.md
+          - "Lavatrice Lavanor WM-700": progetto-finale/corpus/manuali/lavanor-wm700.md
+          - "Avvitatore Ferrex ID-18": progetto-finale/corpus/manuali/ferrex-id18.md
+          - "Bici Velomonte Trail 275": progetto-finale/corpus/manuali/velomonte-trail-275.md
+          - "Rasaerba Greencut RM-46": progetto-finale/corpus/manuali/greencut-rm46.md
+          - "Nota 12/03 — caldaia E4": progetto-finale/corpus/note/2026-03-12-caldaia-e4.md
+          - "Nota 02/04 — lavatrice F03": progetto-finale/corpus/note/2026-04-02-lavatrice-f03.md
+          - "Nota 18/05 — avvitatore": progetto-finale/corpus/note/2026-05-18-avvitatore-batteria.md
+          - "Nota 07/06 — bici": progetto-finale/corpus/note/2026-06-07-bici-freno-spugnoso.md
+          - "Nota 21/07 — rasaerba": progetto-finale/corpus/note/2026-07-21-rasaerba-non-parte.md
+          - "Nota 30/08 — caldaia": progetto-finale/corpus/note/2026-08-30-caldaia-manutenzione.md
+          - "Nota 05/09 — lavatrice": progetto-finale/corpus/note/2026-09-05-lavatrice-cinghia.md
+          - "Le note vocali": progetto-finale/corpus/audio/LEGGIMI.md
+  - Approfondimenti:
+      - Mettere il quaderno su un server: SETUP-VPS.md
+      - Note per chi insegna: DOCENTE.md
+  - Crediti: CREDITI.md
+  - Privacy: PRIVACY.md
