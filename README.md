@@ -50,7 +50,7 @@ The sample corpus (appliance manuals, repair notes, synthetic voice notes) is in
 ## License
 
 - Course texts: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- Code: MIT (full text in `corso/CREDITI.md`)
+- Code: MIT (see [LICENSE](LICENSE))
 
 ## Author
 
