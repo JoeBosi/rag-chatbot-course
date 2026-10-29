@@ -1,28 +1,36 @@
-{#- Piede di pagina del corso: autore, licenze, Crediti e Privacy. -#}
+{#- Piede di pagina del corso: autore, licenze, Crediti e Privacy. In due lingue. -#}
+{% set en = i18n_page_locale == "en" %}
+{% set pre = "en/" if en else "" %}
 <div class="md-copyright gb-piede">
   <span class="gb-piede__riga gb-piede__autore">
+  {% if en %}
+    <a href="https://www.giuseppebosi.com/en/">Giuseppe Bosi</a>,
+    Master's-level degree in Electronic Engineering (5-year Italian Laurea, pre-reform, EQF level 7),
+    Teacher of Computer Science and Technology
+  {% else %}
     <a href="https://www.giuseppebosi.com">Giuseppe Bosi</a>,
     Dottore in Ingegneria Elettronica (V.O.),
     Professore di Scienze e Tecnologie Informatiche
+  {% endif %}
     &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/giuseppebosi" rel="me">LinkedIn</a>
   </span>
   <span class="gb-piede__riga">
-    Testi:
-    <a href="https://creativecommons.org/licenses/by/4.0/deed.it" rel="license">CC BY 4.0</a>
-    &nbsp;·&nbsp; Codice:
-    <a href="{{ 'CREDITI/' | url }}#licenze-di-questo-corso" rel="license">licenza MIT</a>
+    {{ "Texts" if en else "Testi" }}:
+    <a href="https://creativecommons.org/licenses/by/4.0/{{ '' if en else 'deed.it' }}" rel="license">CC BY 4.0</a>
+    &nbsp;·&nbsp; {{ "Code" if en else "Codice" }}:
+    <a href="{{ (pre ~ 'CREDITI/') | url }}#licenze-di-questo-corso" rel="license">{{ "MIT license" if en else "licenza MIT" }}</a>
   </span>
   <span class="gb-piede__riga">
-    <a href="{{ 'CREDITI/' | url }}">Crediti</a>
+    <a href="{{ (pre ~ 'CREDITI/') | url }}">{{ "Credits" if en else "Crediti" }}</a>
     &nbsp;·&nbsp;
-    <a href="{{ 'PRIVACY/' | url }}">Privacy</a>
+    <a href="{{ (pre ~ 'PRIVACY/') | url }}">Privacy</a>
     &nbsp;·&nbsp;
     <a href="https://github.com/JoeBosi/rag-chatbot-course">Source code on GitHub</a>
   </span>
   <span class="gb-piede__riga">
-    Altri corsi:
-    <a href="https://corso-llamacpp.giuseppebosi.com/">Corso pratico di llama.cpp</a>
+    {{ "Other courses" if en else "Altri corsi" }}:
+    <a href="https://corso-llamacpp.giuseppebosi.com/">{{ "llama.cpp hands-on course" if en else "Corso pratico di llama.cpp" }}</a>
     &nbsp;·&nbsp;
-    <a href="https://corso-api-json.giuseppebosi.com/">Corso JSON &amp; API</a>
+    <a href="https://corso-api-json.giuseppebosi.com/">{{ "JSON &amp; API course" if en else "Corso JSON &amp; API" }}</a>
   </span>
 </div>

@@ -31,7 +31,6 @@ theme:
         icon: material/weather-sunny
         name: Passa al tema chiaro
   features:
-    - navigation.instant
     - navigation.tracking
     - navigation.sections
     - navigation.top
@@ -66,6 +65,75 @@ markdown_extensions:
 plugins:
   - search:
       lang: it
+  # Corso bilingue: pagina.md in italiano (URL invariati), pagina.en.md
+  # in inglese sotto /en/. Le pagine non tradotte ricadono sull'italiano.
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: it
+          default: true
+          name: Italiano
+          build: true
+        - locale: en
+          name: English
+          build: true
+          site_name: Build your own AI memory
+          site_description: A free, hands-on 20-hour RAG chatbot course in Python. Build a personal AI memory with cognee, knowledge graphs and free LLM APIs, at zero cost.
+          nav_translations:
+            Il corso: The course
+            Prima di cominciare: Before you start
+            Preparare il computer: Set up your computer
+            Prendere le chiavi: Get your API keys
+            Glossario: Glossary
+            I moduli: Modules
+            "1 — Perché serve una memoria": "1 — Why you need a memory"
+            "Modulo 1: Perché serve una memoria": "Module 1: Why you need a memory"
+            "Modulo 1: laboratorio": "Module 1: lab"
+            "2 — Chiavi, gateway e quote": "2 — Keys, gateway and quotas"
+            "Modulo 2: Chiavi, gateway e quote": "Module 2: Keys, gateway and quotas"
+            "Modulo 2: laboratorio": "Module 2: lab"
+            "3 — Come un testo diventa cercabile": "3 — How a text becomes searchable"
+            "Modulo 3: Come un testo diventa cercabile": "Module 3: How a text becomes searchable"
+            "Modulo 3: laboratorio": "Module 3: lab"
+            "4 — Dal recupero al grafo": "4 — From retrieval to the graph"
+            "Modulo 4: Dal recupero al grafo": "Module 4: From retrieval to the graph"
+            "Modulo 4: laboratorio": "Module 4: lab"
+            "5 — La pipeline di cognee": "5 — The cognee pipeline"
+            "Modulo 5: La pipeline di cognee": "Module 5: The cognee pipeline"
+            "Modulo 5: laboratorio": "Module 5: lab"
+            "6 — Dove vive il dato": "6 — Where the data lives"
+            "Modulo 6: Dove vive il dato": "Module 6: Where the data lives"
+            "Modulo 6: laboratorio": "Module 6: lab"
+            "7 — Manutenzione della memoria": "7 — Memory maintenance"
+            "Modulo 7: Manutenzione della memoria": "Module 7: Memory maintenance"
+            "Modulo 7: laboratorio": "Module 7: lab"
+            "8 — Valutare il proprio sistema": "8 — Evaluating your system"
+            "Modulo 8: Valutare il proprio sistema": "Module 8: Evaluating your system"
+            "Modulo 8: laboratorio": "Module 8: lab"
+            Progetto finale: Final project
+            Il brief: The brief
+            Come ti valuti: How you assess yourself
+            Il corpus di partenza: The starter corpus (Italian)
+            "Caldaia Termovex TX-24": "Boiler Termovex TX-24"
+            "Lavatrice Lavanor WM-700": "Washing machine Lavanor WM-700"
+            "Avvitatore Ferrex ID-18": "Drill driver Ferrex ID-18"
+            "Bici Velomonte Trail 275": "Bike Velomonte Trail 275"
+            "Rasaerba Greencut RM-46": "Lawn mower Greencut RM-46"
+            "Nota 12/03 — caldaia E4": "Note 03/12 — boiler E4"
+            "Nota 02/04 — lavatrice F03": "Note 04/02 — washing machine F03"
+            "Nota 18/05 — avvitatore": "Note 05/18 — drill driver"
+            "Nota 07/06 — bici": "Note 06/07 — bike"
+            "Nota 21/07 — rasaerba": "Note 07/21 — lawn mower"
+            "Nota 30/08 — caldaia": "Note 08/30 — boiler"
+            "Nota 05/09 — lavatrice": "Note 09/05 — washing machine"
+            "Le note vocali": "The voice notes"
+            Approfondimenti: Further reading
+            Mettere il quaderno su un server: Put the notebook on a server
+            Note per chi insegna: Notes for teachers
+            Crediti: Credits
 
 extra_css:
   - assets/extra.css

@@ -61,6 +61,8 @@ def copia() -> int:
     if (LAVORO / "README.md").is_file():
         shutil.copy2(LAVORO / "README.md", LAVORO / "index.md")
         (LAVORO / "README.md").unlink()
+    if (LAVORO / "README.en.md").is_file():
+        (LAVORO / "README.en.md").rename(LAVORO / "index.en.md")
 
     return copiati
 

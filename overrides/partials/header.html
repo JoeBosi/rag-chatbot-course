@@ -34,7 +34,11 @@
         </div>
       </div>
       <!-- Firma dell'autore: riga piccola sotto il titolo del corso. -->
-      <a class="gb-autore" href="https://www.giuseppebosi.com">Prof. Giuseppe Bosi</a>
+      {% if i18n_page_locale == "en" %}
+        <a class="gb-autore" href="https://www.giuseppebosi.com/en/">by Prof. Giuseppe Bosi</a>
+      {% else %}
+        <a class="gb-autore" href="https://www.giuseppebosi.com">Prof. Giuseppe Bosi</a>
+      {% endif %}
     </div>
     {% if config.theme.palette %}
       {% if not config.theme.palette is mapping %}

@@ -9,7 +9,15 @@
     {% set titolo = page.title ~ " - " ~ config.site_name %}
   {% endif %}
   <meta property="og:type" content="website">
-  <meta property="og:locale" content="it_IT">
+  {% set en = i18n_page_locale == "en" %}
+  <meta property="og:locale" content="{{ 'en_US' if en else 'it_IT' }}">
+  {% if page and page.canonical_url %}
+    {% set url_it = page.canonical_url | replace(config.site_url ~ "en/", config.site_url) %}
+    {% set url_en = url_it | replace(config.site_url, config.site_url ~ "en/") %}
+    <link rel="alternate" hreflang="it" href="{{ url_it }}">
+    <link rel="alternate" hreflang="en" href="{{ url_en }}">
+    <link rel="alternate" hreflang="x-default" href="{{ url_it }}">
+  {% endif %}
   <meta property="og:site_name" content="{{ config.site_name | e }}">
   <meta property="og:title" content="{{ titolo | striptags | e }}">
   <meta property="og:description" content="{{ descr | e }}">
@@ -24,7 +32,7 @@
     "name": {{ config.site_name | tojson }},
     "description": {{ config.site_description | tojson }},
     "url": {{ config.site_url | tojson }},
-    "inLanguage": "it",
+    "inLanguage": {{ ("en" if en else "it") | tojson }},
     "isAccessibleForFree": true,
     "timeRequired": "PT20H",
     "license": "https://creativecommons.org/licenses/by/4.0/",
@@ -32,9 +40,9 @@
       "@type": "Person",
       "name": "Giuseppe Bosi",
       "honorificPrefix": "Prof.",
-      "jobTitle": "Professore di Scienze e Tecnologie Informatiche",
-      "hasCredential": "Dottore in Ingegneria Elettronica (V.O.)",
-      "url": "https://www.giuseppebosi.com",
+      "jobTitle": {{ ("Teacher of Computer Science and Technology" if en else "Professore di Scienze e Tecnologie Informatiche") | tojson }},
+      "hasCredential": {{ ("Master's-level degree in Electronic Engineering (5-year Italian Laurea, pre-reform, EQF level 7)" if en else "Dottore in Ingegneria Elettronica (V.O.)") | tojson }},
+      "url": {{ ("https://www.giuseppebosi.com/en/" if en else "https://www.giuseppebosi.com") | tojson }},
       "sameAs": ["https://www.linkedin.com/in/giuseppebosi"]
     },
     "provider": {

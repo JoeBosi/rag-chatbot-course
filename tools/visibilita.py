@@ -24,10 +24,16 @@ CRAWLER_IA = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot",
               "Google-Extended", "Applebot-Extended", "CCBot"]
 
 
-def url_di(percorso: str) -> str:
+def url_di(percorso: str, lingua: str = "it") -> str:
+    base = SITO + ("/en" if lingua == "en" else "")
     if percorso == "index.md":
-        return SITO + "/"
-    return f"{SITO}/{percorso[:-3]}/"
+        return base + "/"
+    return f"{base}/{percorso[:-3]}/"
+
+
+def inglese(file: str) -> str:
+    """Nome della versione inglese di una pagina: pagina.en.md."""
+    return file[:-3] + ".en.md"
 
 
 def pulisci(testo: str) -> str:
@@ -66,7 +72,9 @@ def applica(lavoro: Path, config: Path) -> int:
     pagine = list(pagine_nav(cfg["nav"]))
 
     descrizioni = {}
-    for _, _, file in pagine:
+    nomi = [file for _, _, file in pagine]
+    nomi += [inglese(f) for f in nomi if (lavoro / inglese(f)).is_file()]
+    for file in nomi:
         pagina = lavoro / file
         testo = pagina.read_text(encoding="utf-8")
         descr = cfg["site_description"] if file == "index.md" else descrizione(testo)
@@ -75,6 +83,10 @@ def applica(lavoro: Path, config: Path) -> int:
             fm = "---\ndescription: " + yaml.safe_dump(descr, allow_unicode=True,
                                                        width=1000).split("\n")[0]
             pagina.write_text(fm + "\n---\n\n" + testo, encoding="utf-8")
+        elif testo.startswith("---\n"):
+            trovata = re.search(r"^description: (.*)$", testo, re.M)
+            if trovata:
+                descrizioni[file] = yaml.safe_load(trovata.group(1))
 
     robots = ["User-agent: *", "Allow: /", ""]
     for bot in CRAWLER_IA:
@@ -107,7 +119,30 @@ def applica(lavoro: Path, config: Path) -> int:
               "- [LinkedIn di Giuseppe Bosi](https://www.linkedin.com/in/giuseppebosi): profilo dell'autore"]
     corto += [f"- [{nome}]({url}): altro corso dello stesso autore"
               for nome, url in ALTRI_CORSI]
+
+    tradotte = [(t, f) for _, t, f in pagine if inglese(f) in descrizioni]
+    if tradotte:
+        lingua_en = next(l for l in cfg["plugins"][1]["i18n"]["languages"]
+                         if l["locale"] == "en")
+        traduci = lingua_en.get("nav_translations", {})
+        corto += ["", "## English version", "",
+                  f"The same course in English, under {SITO}/en/. "
+                  "The sample corpus and the questions in the commands stay in Italian.", ""]
+        for titolo, file in tradotte:
+            riga = f"- [{traduci.get(titolo, titolo)}]({url_di(file, 'en')})"
+            if descrizioni[inglese(file)]:
+                riga += f": {descrizioni[inglese(file)]}"
+            corto.append(riga)
+        corto.append(f"- [Full English text]({SITO}/llms-full-en.txt): all translated pages in one Markdown file")
     (lavoro / "llms.txt").write_text("\n".join(corto) + "\n", encoding="utf-8")
+
+    pieno_en = [f"# {cfg['site_name']} (English)", ""]
+    for titolo, file in tradotte:
+        testo = (lavoro / inglese(file)).read_text(encoding="utf-8")
+        testo = re.sub(r"\A---\n.*?\n---\n\n", "", testo, flags=re.S)
+        pieno_en += ["", "---", "", f"Page: {url_di(file, 'en')}", "", testo.strip()]
+    if tradotte:
+        (lavoro / "llms-full-en.txt").write_text("\n".join(pieno_en) + "\n", encoding="utf-8")
 
     pieno = list(testa)
     for _, titolo, file in pagine:
