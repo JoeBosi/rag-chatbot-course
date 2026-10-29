@@ -1,8 +1,10 @@
-# RAG & Chatbot Course: build your own AI memory
+# RAG Chatbot Tutorial: build an AI memory with Python, cognee and free LLM APIs
 
 **English** · [Italiano](README.it.md)
 
-A free, hands-on 20-hour course (in Italian) that takes you from zero to a
+**Free RAG course: build a chatbot that remembers your documents, step by step, at zero cost.**
+
+A hands-on 20-hour RAG chatbot tutorial (course language: Italian) that takes you from zero to a
 personal knowledge base that organizes itself: you pour documents and voice
 notes into it, and it links, updates and answers questions about them.
 Topics: retrieval-augmented generation (RAG), embeddings, knowledge graphs
