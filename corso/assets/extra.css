@@ -73,3 +73,17 @@
 .gb-piede__autore { font-weight: 700; }
 
 .gb-piede__riga { display: block; }
+
+/* Cambio lingua con bandierina, come su www.giuseppebosi.com */
+.gb-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 .4rem;
+  font: 600 .65rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: inherit;
+  opacity: .9;
+  flex: 0 0 auto;
+}
+.gb-lang:hover, .gb-lang:focus-visible { opacity: 1; text-decoration: underline; }
+.gb-lang svg { border-radius: 2px; box-shadow: 0 0 0 1px #0003; }

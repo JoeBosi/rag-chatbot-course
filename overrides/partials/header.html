@@ -48,8 +48,13 @@
     {% if not config.theme.palette is mapping %}
       {% include "partials/javascripts/palette.html" %}
     {% endif %}
-    {% if config.extra.alternate %}
-      {% include "partials/alternate.html" %}
+    {#- Cambio lingua con bandierina, come su www.giuseppebosi.com:
+        UK sulla pagina italiana, Italia sulla pagina inglese. -#}
+    {% set pagina = page.url if page else "" %}
+    {% if i18n_page_locale == "en" %}
+      <a class="gb-lang" href="{{ (pagina[3:] if pagina.startswith('en/') else pagina) | url }}" hreflang="it" lang="it" title="Versione italiana"><svg viewBox="0 0 3 2" width="22" height="11" aria-hidden="true" preserveAspectRatio="none"><path d="M0,0h1v2H0z" fill="#009246"/><path d="M1,0h1v2H1z" fill="#fff"/><path d="M2,0h1v2H2z" fill="#CE2B37"/></svg>IT</a>
+    {% else %}
+      <a class="gb-lang" href="{{ ('en/' ~ pagina) | url }}" hreflang="en" lang="en" title="English version"><svg viewBox="0 0 60 30" width="22" height="11" aria-hidden="true"><clipPath id="fg"><path d="M0,0v30h60V0z"/></clipPath><clipPath id="fh"><path d="M30,15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(#fg)"><path d="M0,0v30h60V0z" fill="#012169"/><path d="M0,0 60,30M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30M60,0 0,30" clip-path="url(#fh)" stroke="#C8102E" stroke-width="4"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></g></svg>EN</a>
     {% endif %}
     {% if "material/search" in config.plugins %}
       {% set search = config.plugins["material/search"] | attr("config") %}
