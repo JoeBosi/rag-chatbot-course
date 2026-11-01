@@ -84,7 +84,7 @@ a short English gloss in prose if the meaning matters.
 | Italian | English |
 |---|---|
 | Prof. Giuseppe Bosi (firma) | by Prof. Giuseppe Bosi |
-| Dottore in Ingegneria Elettronica (V.O.) | Master's-level degree in Electronic Engineering (5-year Italian Laurea, pre-reform, EQF level 7) |
+| Dottore in Ingegneria Elettronica | Master's-level degree in Electronic Engineering (5-year Italian Laurea, pre-reform, EQF level 7) |
 | Professore di Scienze e Tecnologie Informatiche | Teacher of Computer Science and Technology |
 | sito dell'autore | https://www.giuseppebosi.com/en/ |
 
