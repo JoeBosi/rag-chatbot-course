@@ -1,0 +1,14 @@
+{#- Meta description unica per pagina, usata in site_meta e in extrahead. -#}
+{% set en = i18n_page_locale == "en" %}
+{% set home = page and (page.is_homepage or page.url in ["", "en/"]) %}
+  {% if page and page.meta and page.meta.description %}
+    {% set d = page.meta.description %}
+  {% elif home or not page %}
+    {% set d = config.site_description %}
+  {% else %}
+    {% set d = page.title ~ (": worked solution from the free RAG chatbot course in Python, " if en else ": soluzione commentata del corso gratuito su RAG e chatbot in Python, ") ~ config.site_name %}
+  {% endif %}
+  {% if en and page and page.file and not page.file.src_uri.endswith(".en.md") and not home %}
+    {% set d = "Sample document in Italian from the RAG course: " ~ d %}
+  {% endif %}
+{{ d }}

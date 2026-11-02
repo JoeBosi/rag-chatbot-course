@@ -19,6 +19,8 @@ ALTRI_CORSI = [
     ("Corso pratico di llama.cpp", "https://corso-llamacpp.giuseppebosi.com/"),
     ("Corso JSON & API", "https://corso-api-json.giuseppebosi.com/"),
 ]
+# Chiave IndexNow (Bing, Yandex): pubblica per definizione, sta nel file alla radice.
+INDEXNOW = "1017265157af7eea64394c6bb597b9a0"
 CRAWLER_IA = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot",
               "Claude-SearchBot", "anthropic-ai", "PerplexityBot",
               "Google-Extended", "Applebot-Extended", "CCBot"]
@@ -57,6 +59,21 @@ def descrizione(md: str, massimo: int = 158) -> str:
     return ""
 
 
+def descr_en(file: str, testo: str, descr: str, cfg) -> str:
+    """Descrizione inglese unica: mai vuota, mai uguale a quella italiana."""
+    if file == "index.en.md":
+        lingua = next(l for l in cfg["plugins"][1]["i18n"]["languages"] if l["locale"] == "en")
+        return lingua.get("site_description", descr)
+    titolo = re.search(r"^# (.+)$", testo, re.M)
+    titolo = pulisci(titolo.group(1)) if titolo else file[:-6].rsplit("/", 1)[-1]
+    if not descr:
+        return f"{titolo}: page of the free hands-on RAG chatbot course in Python, Build your own AI memory."
+    if "/corpus/" in file or "soluzione" in file:
+        return (f"{titolo} (sample in Italian): " + descr)[:158].rsplit(" ", 1)[0] + "…" \
+            if len(f"{titolo} (sample in Italian): " + descr) > 158 else f"{titolo} (sample in Italian): " + descr
+    return descr
+
+
 def pagine_nav(voci, sezione=None):
     """(sezione di primo livello, titolo, file) in ordine di menu."""
     for voce in voci:
@@ -78,6 +95,8 @@ def applica(lavoro: Path, config: Path) -> int:
         pagina = lavoro / file
         testo = pagina.read_text(encoding="utf-8")
         descr = cfg["site_description"] if file == "index.md" else descrizione(testo)
+        if file.endswith(".en.md"):
+            descr = descr_en(file, testo, descr, cfg)
         descrizioni[file] = descr
         if descr and not testo.startswith("---\n"):
             fm = "---\ndescription: " + yaml.safe_dump(descr, allow_unicode=True,
@@ -92,6 +111,7 @@ def applica(lavoro: Path, config: Path) -> int:
     for bot in CRAWLER_IA:
         robots += [f"User-agent: {bot}", "Allow: /", ""]
     robots.append(f"Sitemap: {SITO}/sitemap.xml")
+    (lavoro / f"{INDEXNOW}.txt").write_text(INDEXNOW + "\n", encoding="utf-8")
     (lavoro / "robots.txt").write_text("\n".join(robots) + "\n", encoding="utf-8")
 
     testa = [
