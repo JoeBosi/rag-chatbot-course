@@ -32,6 +32,11 @@ per voce.
 | Soldi | **zero**. Nessuna carta di credito, in nessun passaggio |
 | Account gratuiti | Groq, Google AI Studio, OpenRouter — istruzioni in [CHIAVI.md](CHIAVI.md) |
 
+**Non vuoi installare niente?** Ogni laboratorio ha un notebook per Google Colab (cartella
+`notebooks/`): il link è in cima alla pagina del laboratorio. Colab gira nel browser e chiede
+solo un account Google gratuito; per i passaggi che chiamano il modello serve comunque la chiave
+Groq gratuita ([CHIAVI.md](CHIAVI.md#8-se-usi-google-colab)).
+
 ## Avvertenza sui dati: leggila adesso
 
 I piani gratuiti dei fornitori di modelli si pagano con i tuoi dati: quasi
@@ -74,8 +79,8 @@ Laboratorio: **13,6 ore su 20**.
 ## Come si usa questo repository
 
 ```bash
-git clone <indirizzo-del-repo> memoria-ai
-cd memoria-ai
+git clone https://github.com/JoeBosi/rag-chatbot-course.git memoria-ai
+cd memoria-ai/corso
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -83,7 +88,7 @@ cp .env.example .env      # poi riempi .env seguendo CHIAVI.md
 ```
 
 Tutti i percorsi scritti nel corso sono **relativi alla radice del
-repository**. Se un comando comincia con `python moduli/03-...`, va
+repository**, cioè alla cartella `corso/`. Se un comando comincia con `python moduli/03-...`, va
 lanciato da questa cartella.
 
 Struttura di ogni modulo:

@@ -2,6 +2,9 @@
 
 **Duration: 78 minutes.**
 
+!!! tip "Try it without installing anything"
+    [Open the lab in Google Colab](https://colab.research.google.com/github/JoeBosi/rag-chatbot-course/blob/main/corso/notebooks/lab07-manutenzione.ipynb){ target="_blank" rel="noopener" }: a notebook with the same commands, to run in your browser. It needs a free Google account, and the free Groq key, which you set in Colab Secrets ([CHIAVI.md](../../CHIAVI.md#8-se-usi-google-colab)).
+
 You need the knowledge base from module 5 or 6 already digested, and the
 gateway running.
 
@@ -34,7 +37,7 @@ Write the answer on a sheet of paper. Then look at what the system had
 in hand:
 
 ```bash
-python memoria/quaderno.py chiedi "pressione impianto Termovex" --tipo pezzi
+python memoria/quaderno.py chiedi --pezzi "pressione impianto Termovex"
 ```
 
 Two questions to answer before you go on:
@@ -225,7 +228,7 @@ python memoria/manutenzione.py salva dati/backup
 3. if you are on module 6 with PostgreSQL: `pg_dump`
 
 ```bash
-docker compose exec -T postgres pg_dump -U cognee cognee > dati/backup/registro.sql
+docker exec memoria-postgres pg_dump -U cognee cognee_db > dati/backup/registro.sql
 ```
 
 Check that the three pieces exist and are not empty:

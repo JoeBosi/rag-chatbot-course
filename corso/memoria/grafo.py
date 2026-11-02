@@ -94,9 +94,13 @@ Regole:
 
 
 def cliente() -> OpenAI:
+    chiave = os.getenv("LLM_API_KEY") or os.getenv("GROQ_API_KEY", "")
+    if not chiave:
+        sys.exit("Manca GROQ_API_KEY in .env (o LLM_API_KEY, se passi dal gateway). "
+                 "Vedi CHIAVI.md.")
     return OpenAI(
         base_url=os.getenv("LLM_ENDPOINT", "https://api.groq.com/openai/v1"),
-        api_key=os.getenv("LLM_API_KEY") or os.getenv("GROQ_API_KEY", ""),
+        api_key=chiave,
         timeout=180,
     )
 
@@ -134,7 +138,7 @@ def costruisci() -> dict:
     entita: dict[str, dict] = {}
     relazioni: list[dict] = []
 
-    percorsi = [p for p in sorted(CORPUS.rglob("*.md")) if p.name != "LEGGIMI.md"]
+    percorsi = [p for p in sorted(CORPUS.rglob("*.md")) if not p.name.startswith("LEGGIMI")]
     for numero, percorso in enumerate(percorsi, 1):
         nome_file = str(percorso.relative_to(CORPUS))
         print(f"[{numero}/{len(percorsi)}] {nome_file}", flush=True)

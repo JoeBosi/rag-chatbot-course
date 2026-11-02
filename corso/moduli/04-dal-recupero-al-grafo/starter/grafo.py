@@ -94,9 +94,13 @@ Regole:
 
 
 def cliente() -> OpenAI:
+    chiave = os.getenv("LLM_API_KEY") or os.getenv("GROQ_API_KEY", "")
+    if not chiave:
+        sys.exit("Manca GROQ_API_KEY in .env (o LLM_API_KEY, se passi dal gateway). "
+                 "Vedi CHIAVI.md.")
     return OpenAI(
         base_url=os.getenv("LLM_ENDPOINT", "https://api.groq.com/openai/v1"),
-        api_key=os.getenv("LLM_API_KEY") or os.getenv("GROQ_API_KEY", ""),
+        api_key=chiave,
         timeout=180,
     )
 
@@ -127,7 +131,7 @@ def costruisci() -> dict:
     """Legge tutto il corpus e mette insieme un grafo solo.
 
     TODO 1 ----------------------------------------------------------------
-    - scorri i .md del corpus (salta LEGGIMI.md);
+    - scorri i .md del corpus (salta i LEGGIMI*.md);
     - per ognuno chiama estrai();
     - accumula le entita' in un dizionario nome -> {"nome", "tipo", "fonti"}
       (se la stessa entita' torna in piu' documenti, aggiungi la fonte);

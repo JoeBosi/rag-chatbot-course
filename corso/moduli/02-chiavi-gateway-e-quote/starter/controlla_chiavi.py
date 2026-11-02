@@ -19,6 +19,12 @@ from dotenv import load_dotenv
 RADICE = Path(__file__).resolve().parents[3]
 load_dotenv(RADICE / ".env")
 
+# Alcuni fornitori (Groq passa da Cloudflare) rispondono 403 a chi non
+# dichiara chi e': la libreria urllib di Python, per esempio, si presenta
+# come "Python-urllib" e viene respinta. httpx ha un User-Agent suo, ma lo
+# scriviamo noi, cosi' e' chiaro e vale ovunque giri lo script (Colab compreso).
+USER_AGENT = "memoria-ai-corso/1.0 (+https://corso-rag.giuseppebosi.com)"
+
 # nome, indirizzo, variabile con la chiave, modello da provare
 FORNITORI = [
     ("Groq", "https://api.groq.com/openai/v1", "GROQ_API_KEY",
@@ -52,7 +58,8 @@ def prova(nome, indirizzo, variabile, modello):
         risposta = httpx.post(
             f"{indirizzo}/chat/completions",
             headers={"Authorization": f"Bearer {chiave}",
-                     "Content-Type": "application/json"},
+                     "Content-Type": "application/json",
+                     "User-Agent": USER_AGENT},
             json={"model": modello,
                   "messages": [{"role": "user", "content": "di': ok"}],
                   "max_tokens": 5, "temperature": 0},

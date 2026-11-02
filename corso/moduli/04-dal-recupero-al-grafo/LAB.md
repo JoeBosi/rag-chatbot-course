@@ -2,6 +2,9 @@
 
 **Durata: 102 minuti.**
 
+!!! tip "Provalo senza installare niente"
+    [Apri il laboratorio in Google Colab](https://colab.research.google.com/github/JoeBosi/rag-chatbot-course/blob/main/corso/notebooks/lab04-grafo-a-mano.ipynb){ target="_blank" rel="noopener" }: un notebook con gli stessi comandi, da eseguire nel browser. Serve un account Google gratuito, e la chiave Groq gratuita che si imposta nei Segreti di Colab ([CHIAVI.md](../../CHIAVI.md#8-se-usi-google-colab)).
+
 Alla fine avrai un grafo di entità e relazioni costruito dai tuoi
 documenti, e risponderai alla domanda che nel modulo 3 era impossibile.
 

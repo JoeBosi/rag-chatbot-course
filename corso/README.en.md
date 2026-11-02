@@ -41,6 +41,11 @@ appears, and the [glossary](GLOSSARIO.md) collects them all, one line each.
 | Money | **zero**. No credit card, at any step |
 | Free accounts | Groq, Google AI Studio, OpenRouter — instructions in [CHIAVI.md](CHIAVI.md) |
 
+**Would you rather install nothing?** Every lab has a Google Colab notebook (the
+`notebooks/` folder): the link is at the top of the lab page. Colab runs in the browser and only
+asks for a free Google account; the steps that call the model still need the free Groq key
+([CHIAVI.md](CHIAVI.md#8-se-usi-google-colab)).
+
 ## Data warning: read it now
 
 Free tiers of model providers are paid for with your data: almost all of
@@ -83,8 +88,8 @@ Lab time: **13.6 hours out of 20**.
 ## How to use this repository
 
 ```bash
-git clone <indirizzo-del-repo> memoria-ai
-cd memoria-ai
+git clone https://github.com/JoeBosi/rag-chatbot-course.git memoria-ai
+cd memoria-ai/corso
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -95,7 +100,7 @@ The repository is on GitHub:
 [JoeBosi/rag-chatbot-course](https://github.com/JoeBosi/rag-chatbot-course)
 (the course files are in its `corso/` folder).
 
-All paths in the course are **relative to the root of the repository**.
+All paths in the course are **relative to the root of the repository**, that is, to the `corso/` folder.
 If a command starts with `python moduli/03-...`, run it from that folder.
 
 Structure of each module:

@@ -1,6 +1,9 @@
 # Laboratorio 5 — Il quaderno, con cognee sotto
 
 **Durata: 120 minuti**, dei quali una buona parte passata ad aspettare:
+
+!!! tip "Provalo senza installare niente"
+    [Apri il laboratorio in Google Colab](https://colab.research.google.com/github/JoeBosi/rag-chatbot-course/blob/main/corso/notebooks/lab05-quaderno-cognee.ipynb){ target="_blank" rel="noopener" }: un notebook con gli stessi comandi, da eseguire nel browser. Serve un account Google gratuito, e la chiave Groq gratuita che si imposta nei Segreti di Colab ([CHIAVI.md](../../CHIAVI.md#8-se-usi-google-colab)).
 portati qualcosa da leggere, o lancia `digerisci` e vai a prendere un
 caffè.
 

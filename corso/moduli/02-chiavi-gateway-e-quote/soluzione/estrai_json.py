@@ -89,6 +89,14 @@ def main():
             sys.exit("Il modello non e' riuscito a rispettare lo schema.\n"
                      "Non e' colpa tua: prova un modello piu' grande "
                      "(openai/gpt-oss-120b invece di 20b).")
+        if "onnection" in type(errore).__name__ or "onnection" in testo:
+            sys.exit("Non riesco a parlare col gateway. E' acceso (passo 1 del\n"
+                     "laboratorio)? Lancialo, aspetta la riga 'Uvicorn running',\n"
+                     "poi riprova.")
+        if "401" in testo or "uthentication" in type(errore).__name__:
+            sys.exit("Una chiave e' stata rifiutata. Controlla due cose: che\n"
+                     "LLM_API_KEY (o GATEWAY_KEY) valga sk-memoria-locale, e che\n"
+                     "GROQ_API_KEY nel terminale del gateway sia quella giusta.")
         raise
 
     print(json.dumps(dati, indent=2, ensure_ascii=False))

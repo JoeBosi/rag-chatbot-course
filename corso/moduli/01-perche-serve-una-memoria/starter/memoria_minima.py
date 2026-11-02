@@ -50,7 +50,7 @@ def carica_documenti() -> list[dict]:
     """Legge il corpus. Ogni documento e' {"nome": ..., "testo": ...}."""
     documenti = []
     for percorso in sorted(CORPUS.rglob("*.md")):
-        if percorso.name == "LEGGIMI.md":
+        if percorso.name.startswith("LEGGIMI"):
             continue
         documenti.append({
             "nome": str(percorso.relative_to(CORPUS)),

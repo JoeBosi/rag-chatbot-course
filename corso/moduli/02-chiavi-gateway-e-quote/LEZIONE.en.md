@@ -163,7 +163,7 @@ command that builds the graph — makes, for every chunk of text:
 | embedding (local, uses no quota) | 0 |
 
 So: **2 calls per chunk of text**, plus the length of the chunk in
-tokens, twice. The course corpus (17,036 characters) split into
+tokens, twice. The course corpus (17,080 characters) split into
 1,000-character chunks makes **22 chunks, 44 calls, about 17,000
 tokens**. On the Groq free tier that is **2.1 minutes of forced
 waiting**, not two seconds. In the lab you compute it with a script

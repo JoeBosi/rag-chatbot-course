@@ -2,6 +2,9 @@
 
 **Durata: 84 minuti.**
 
+!!! tip "Provalo senza installare niente"
+    [Apri il laboratorio in Google Colab](https://colab.research.google.com/github/JoeBosi/rag-chatbot-course/blob/main/corso/notebooks/lab06-dove-vive-il-dato.ipynb){ target="_blank" rel="noopener" }: un notebook con gli stessi comandi, da eseguire nel browser. Serve un account Google gratuito, e la chiave Groq gratuita che si imposta nei Segreti di Colab ([CHIAVI.md](../../CHIAVI.md#8-se-usi-google-colab)). In Colab si prova la parte senza Docker (passo 1); PostgreSQL e pgvector si fanno sul tuo computer.
+
 Alla fine avrai l'archivio su PostgreSQL con pgvector, il grafo in Kuzu
 davvero ispezionabile, e uno strumento per guardarci dentro.
 
@@ -116,6 +119,16 @@ FROM prova ORDER BY punto <=> '[1.0, 0.1, 0.0]';
 SQL
 ```
 
+Devi vedere queste tre righe, nello stesso ordine:
+
+```text
+   testo    | distanza 
+------------+----------
+ rasaerba   |   0.0000
+ tagliaerba |   0.0071
+ caldaia    |   0.9901
+```
+
 «tagliaerba» deve risultare vicinissimo e «caldaia» lontano. Sono i
 vettori del modulo 3, in tre dimensioni invece di 384, dentro una query
 SQL normale.
@@ -131,7 +144,7 @@ LIMIT 1;
 SQL
 ```
 
-Filtro esatto e ordinamento per somiglianza, insieme. Poi pulisci:
+Filtro esatto e ordinamento per somiglianza, insieme. La risposta è una riga: `tagliaerba`. Poi pulisci:
 
 ```bash
 docker exec memoria-postgres psql -U cognee -d cognee_db -c "DROP TABLE prova;"

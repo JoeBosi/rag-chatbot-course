@@ -88,7 +88,7 @@ def carica_pezzi(per_titoli: bool = True) -> list[dict]:
     """
     pezzi = []
     for percorso in sorted(CORPUS.rglob("*.md")):
-        if percorso.name == "LEGGIMI.md":
+        if percorso.name.startswith("LEGGIMI"):
             continue
         testo = percorso.read_text(encoding="utf-8")
         nome = str(percorso.relative_to(CORPUS))

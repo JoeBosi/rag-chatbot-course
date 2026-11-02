@@ -26,6 +26,11 @@ SITO = RADICE / "site"
 AMMESSE = {".md", ".py", ".yaml", ".yml", ".txt", ".toml", ".cfg", ".png",
            ".jpg", ".jpeg", ".svg", ".ico", ".css", ".js"}
 
+# I notebook Colab (corso/notebooks/*.ipynb) NON si pubblicano sul sito:
+# Colab li apre direttamente da GitHub (vedi il link in cima a ogni LAB).
+# Per questo .ipynb non e' tra le estensioni ammesse. Sono generati da
+# tools/crea_notebook.py.
+
 # Cartelle che non escono mai, qualunque cosa contengano.
 VIETATE = {"dati", ".venv", ".venv-gateway", "__pycache__", ".git",
            "site", "build", ".pytest_cache"}

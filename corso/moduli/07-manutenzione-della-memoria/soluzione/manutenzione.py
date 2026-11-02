@@ -159,7 +159,7 @@ async def salva(cartella: str) -> None:
 
     print("\nManca il registro. Con SQLite e' un file, copialo a programma")
     print("fermo. Con PostgreSQL (modulo 6):")
-    print(f"  docker compose exec -T postgres pg_dump -U cognee cognee"
+    print(f"  docker exec memoria-postgres pg_dump -U cognee cognee_db"
           f" > {destinazione / 'registro.sql'}")
     print("\nUn backup mai ripristinato non e' un backup, e' un file.")
 

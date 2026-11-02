@@ -230,10 +230,10 @@ And the count at different depths:
 
 | method | top 1 | top 3 | top 5 |
 |---|:---:|:---:|:---:|
-| BM25 | 4/10 | 8/10 | 10/10 |
-| semantic | 5/10 | 7/10 | 8/10 |
-| hybrid (RRF) | 4/10 | 8/10 | 10/10 |
-| *union* | *7/10* | *10/10* | *10/10* |
+| BM25 | 3/10 | 8/10 | 10/10 |
+| semantic | 4/10 | 7/10 | 8/10 |
+| hybrid (RRF) | 3/10 | 8/10 | 10/10 |
+| *union* | *6/10* | *10/10* | *10/10* |
 
 Read it carefully, because it contradicts what you read around:
 

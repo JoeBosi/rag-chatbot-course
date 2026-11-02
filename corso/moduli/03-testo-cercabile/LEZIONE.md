@@ -229,10 +229,10 @@ E il conto a diverse profondità:
 
 | metodo | primi 1 | primi 3 | primi 5 |
 |---|:---:|:---:|:---:|
-| BM25 | 4/10 | 8/10 | 10/10 |
-| semantica | 5/10 | 7/10 | 8/10 |
-| ibrida (RRF) | 4/10 | 8/10 | 10/10 |
-| *unione* | *7/10* | *10/10* | *10/10* |
+| BM25 | 3/10 | 8/10 | 10/10 |
+| semantica | 4/10 | 7/10 | 8/10 |
+| ibrida (RRF) | 3/10 | 8/10 | 10/10 |
+| *unione* | *6/10* | *10/10* | *10/10* |
 
 Leggilo con attenzione, perché contraddice quello che si legge in giro:
 

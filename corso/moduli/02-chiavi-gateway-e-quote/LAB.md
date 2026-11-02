@@ -2,6 +2,9 @@
 
 **Durata: 78 minuti.**
 
+!!! tip "Provalo senza installare niente"
+    [Apri il laboratorio in Google Colab](https://colab.research.google.com/github/JoeBosi/rag-chatbot-course/blob/main/corso/notebooks/lab02-gateway-e-token.ipynb){ target="_blank" rel="noopener" }: un notebook con gli stessi comandi, da eseguire nel browser. Serve un account Google gratuito, e la chiave Groq gratuita che si imposta nei Segreti di Colab ([CHIAVI.md](../../CHIAVI.md#8-se-usi-google-colab)).
+
 Alla fine avrai un gateway che gira sul tuo computer, il tuo sistema che
 ci passa attraverso senza saperlo, e uno script che ti dice quanto costa
 un lavoro prima di lanciarlo.
@@ -151,10 +154,10 @@ Sul corpus del corso devi ottenere esattamente:
 
 ```text
 documenti                    12
-caratteri                 17036
+caratteri                 17080
 pezzi da 1000 caratteri         22
 chiamate al modello          44
-token (stima)             17036
+token (stima)             17080
 
 limite token:    2.1 minuti
 limite chiamate: 1.5 minuti

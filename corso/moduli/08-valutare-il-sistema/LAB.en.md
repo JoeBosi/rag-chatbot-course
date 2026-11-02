@@ -2,6 +2,9 @@
 
 **Duration: 84 minutes.**
 
+!!! tip "Try it without installing anything"
+    [Open the lab in Google Colab](https://colab.research.google.com/github/JoeBosi/rag-chatbot-course/blob/main/corso/notebooks/lab08-valutare-il-sistema.ipynb){ target="_blank" rel="noopener" }: a notebook with the same commands, to run in your browser. It needs a free Google account, and the free Groq key, which you set in Colab Secrets ([CHIAVI.md](../../CHIAVI.md#8-se-usi-google-colab)).
+
 You need the gateway running and the **complete** knowledge base, all
 twelve documents. If in module 5 you used `--ridotto`, fix it now:
 

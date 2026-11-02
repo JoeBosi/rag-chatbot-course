@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 from dotenv import load_dotenv
-from openai import OpenAI
+from openai import APIConnectionError, OpenAI
 
 RADICE = Path(__file__).resolve().parents[1]
 load_dotenv(RADICE / ".env")
@@ -58,9 +58,14 @@ def chiedi(domanda: str, sistema: str | None = None, temperatura: float = 0.0) -
     if sistema:
         messaggi.append({"role": "system", "content": sistema})
     messaggi.append({"role": "user", "content": domanda})
-    risposta = client.chat.completions.create(
-        model=modello, messages=messaggi, temperature=temperatura,
-    )
+    try:
+        risposta = client.chat.completions.create(
+            model=modello, messages=messaggi, temperature=temperatura,
+        )
+    except APIConnectionError:
+        sys.exit(f"Non riesco a raggiungere {client.base_url}. Con il gateway "
+                 "(modulo 2) o con Ollama il programma deve essere acceso; con "
+                 "Groq controlla la rete.")
     return (risposta.choices[0].message.content or "").strip()
 
 

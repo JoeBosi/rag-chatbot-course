@@ -76,13 +76,14 @@ pacchetti standard; in quel caso va bene anche la 3.11
 ## 2. Il repository
 
 ```bash
-git clone <indirizzo-del-repo> memoria-ai
-cd memoria-ai
+git clone https://github.com/JoeBosi/rag-chatbot-course.git memoria-ai
+cd memoria-ai/corso
 ```
 
 Da qui in avanti, **tutti i comandi del corso si lanciano da questa
-cartella**. Se un comando dice `python moduli/01-.../verifica.py`, tu sei
-in `memoria-ai`.
+cartella**, cioè da `memoria-ai/corso`: nel corso la chiamiamo «la radice del
+repository». Se un comando dice `python moduli/01-.../verifica.py`, tu sei
+in `memoria-ai/corso`.
 
 ## 3. L'ambiente isolato
 
@@ -296,7 +297,8 @@ Verifica che sia davvero così:
 git check-ignore -v .env
 ```
 
-Deve rispondere `.gitignore:1:.env	.env`. Se non risponde niente,
+Deve rispondere con una riga che finisce con `.gitignore:1:.env	.env`
+(davanti può esserci il percorso, per esempio `corso/`). Se non risponde niente,
 qualcosa è fuori posto: fermati e sistemalo prima di andare avanti.
 
 ## 6. Prova generale

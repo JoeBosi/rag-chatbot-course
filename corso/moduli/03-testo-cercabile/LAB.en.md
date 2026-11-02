@@ -2,6 +2,9 @@
 
 **Duration: 120 minutes.**
 
+!!! tip "Try it without installing anything"
+    [Open the lab in Google Colab](https://colab.research.google.com/github/JoeBosi/rag-chatbot-course/blob/main/corso/notebooks/lab03-spezzare-cercare-misurare.ipynb){ target="_blank" rel="noopener" }: a notebook with the same commands, to run in your browser. It needs a free Google account. This lab never calls the model: no key is needed.
+
 At the end you will have four new pieces of your system: `pezzi.py`,
 `lessicale.py`, `semantica.py`, `ibrida.py` — and, above all, a way to
 know whether a change makes things better or worse.
@@ -122,6 +125,11 @@ print('rasaerba vs caldaia:   ', round(float(similitudine_coseno(v[0], v[2:3])[0
 (The sentences mean: "the lawn mower won't start", "the lawn mower won't
 start" with different words, "the boiler shows error E4".)
 
+You must read about `0.769` on the first line and `0.258` on the second. If a
+`UserWarning ... now uses mean pooling instead of CLS embedding` appears, it is
+normal: it says the model changed compared with the first versions of the library,
+and the course uses the current version.
+
 Two sentences with **no words in common** (apart from «non») must come
 out much more similar to each other than to the third. If the two
 numbers are almost the same, the cosine is wrong: you probably forgot to
@@ -140,6 +148,16 @@ for p in Semantica(carica_pezzi()).cerca('Il tagliaerba non si accende'):
 ```
 
 (The question means: "The lawn mower won't turn on".)
+
+Expected output (numbers may differ by a few thousandths):
+
+```text
+0.471 note/2026-07-21-rasaerba-non-parte.md#0
+0.459 manuali/greencut-rm46.md#6
+0.451 manuali/velomonte-trail-275.md#5
+0.432 manuali/greencut-rm46.md#0
+0.432 manuali/greencut-rm46.md#7
+```
 
 The lawn mower manual must appear near the top, **even though the word
 «tagliaerba» is not written anywhere in the corpus**. This is the module
@@ -168,10 +186,10 @@ deterministic):
 
 ```text
 metodo        primi 1  primi 3  primi 5
-BM25            4/10     8/10    10/10
-semantica       5/10     7/10     8/10
-ibrida          4/10     8/10    10/10
--- unione       7/10    10/10    10/10
+BM25            3/10     8/10    10/10
+semantica       4/10     7/10     8/10
+ibrida          3/10     8/10    10/10
+-- unione       6/10    10/10    10/10
 ```
 
 If they do not match, you got something wrong in the previous steps: the

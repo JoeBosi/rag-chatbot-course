@@ -1,6 +1,9 @@
 # Lab 5 — The notebook, with cognee underneath {#laboratorio-5-il-quaderno-con-cognee-sotto}
 
 **Duration: 120 minutes**, a good part of them spent waiting: bring
+
+!!! tip "Try it without installing anything"
+    [Open the lab in Google Colab](https://colab.research.google.com/github/JoeBosi/rag-chatbot-course/blob/main/corso/notebooks/lab05-quaderno-cognee.ipynb){ target="_blank" rel="noopener" }: a notebook with the same commands, to run in your browser. It needs a free Google account, and the free Groq key, which you set in Colab Secrets ([CHIAVI.md](../../CHIAVI.md#8-se-usi-google-colab)).
 something to read, or start `digerisci` and go get a coffee.
 
 By the end you will have `memoria/quaderno.py`: a single program holding

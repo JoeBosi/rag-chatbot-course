@@ -2,6 +2,9 @@
 
 **Durata: 60 minuti.**
 
+!!! tip "Provalo senza installare niente"
+    [Apri il laboratorio in Google Colab](https://colab.research.google.com/github/JoeBosi/rag-chatbot-course/blob/main/corso/notebooks/lab01-rag-in-trenta-righe.ipynb){ target="_blank" rel="noopener" }: un notebook con gli stessi comandi, da eseguire nel browser. Serve un account Google gratuito, e la chiave Groq gratuita che si imposta nei Segreti di Colab ([CHIAVI.md](../../CHIAVI.md#8-se-usi-google-colab)).
+
 Alla fine avrai, nella cartella `memoria/` del repository, due file che
 userai per tutto il corso: `llm.py` (l'unico punto da cui si parla col
 modello) e `memoria_minima.py` (cerca, poi chiede).
@@ -35,9 +38,19 @@ python moduli/01-perche-serve-una-memoria/starter/conta_token.py \
   progetto-finale/corpus/manuali/*.md progetto-finale/corpus/note/*.md
 ```
 
+Le ultime righe devono assomigliare a queste:
+
+```text
+TOTALE                                                        4270
+
+Quota Groq gratuita: 8000 token/minuto, 200000 token/giorno.
+Mandare tutto questo in un prompt solo consuma il 53% della quota di un minuto
+e ti concede 46 domande al giorno.
+```
+
 Annota il totale. **Scrivilo da qualche parte**: nel modulo 3 lo
 confronterai con quanti token consuma il sistema dopo aver imparato a
-cercare. Sul corpus del corso sono circa 4.400 token.
+cercare. Sul corpus del corso sono circa 4.300 token.
 
 ## Passo 2 — `cerca()` (25 minuti)
 

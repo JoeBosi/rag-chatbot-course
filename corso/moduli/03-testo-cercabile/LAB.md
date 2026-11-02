@@ -2,6 +2,9 @@
 
 **Durata: 120 minuti.**
 
+!!! tip "Provalo senza installare niente"
+    [Apri il laboratorio in Google Colab](https://colab.research.google.com/github/JoeBosi/rag-chatbot-course/blob/main/corso/notebooks/lab03-spezzare-cercare-misurare.ipynb){ target="_blank" rel="noopener" }: un notebook con gli stessi comandi, da eseguire nel browser. Serve un account Google gratuito. Questo laboratorio non chiama mai il modello: non serve nessuna chiave.
+
 Alla fine avrai quattro pezzi nuovi del tuo sistema: `pezzi.py`,
 `lessicale.py`, `semantica.py`, `ibrida.py` — e, soprattutto, un modo per
 sapere se una modifica migliora le cose o le peggiora.
@@ -115,6 +118,11 @@ print('rasaerba vs caldaia:   ', round(float(similitudine_coseno(v[0], v[2:3])[0
 "
 ```
 
+Devi leggere circa `0.769` per la prima riga e `0.258` per la seconda.
+Se compare un avviso `UserWarning ... now uses mean pooling instead of CLS
+embedding` è normale: dice che il modello è cambiato rispetto alle prime
+versioni della libreria, e il corso usa la versione attuale.
+
 Due frasi senza **nessuna parola in comune** (a parte «non») devono
 risultare molto più simili fra loro che alla terza. Se i due numeri sono
 quasi uguali, il coseno è sbagliato: probabilmente hai dimenticato di
@@ -130,6 +138,16 @@ from semantica import Semantica
 for p in Semantica(carica_pezzi()).cerca('Il tagliaerba non si accende'):
     print(round(p['punteggio'],3), p['id'])
 "
+```
+
+Output atteso (i numeri possono differire di qualche millesimo):
+
+```text
+0.471 note/2026-07-21-rasaerba-non-parte.md#0
+0.459 manuali/greencut-rm46.md#6
+0.451 manuali/velomonte-trail-275.md#5
+0.432 manuali/greencut-rm46.md#0
+0.432 manuali/greencut-rm46.md#7
 ```
 
 Il manuale del rasaerba deve comparire fra i primi, **anche se la parola
@@ -159,10 +177,10 @@ deterministico):
 
 ```text
 metodo        primi 1  primi 3  primi 5
-BM25            4/10     8/10    10/10
-semantica       5/10     7/10     8/10
-ibrida          4/10     8/10    10/10
--- unione       7/10    10/10    10/10
+BM25            3/10     8/10    10/10
+semantica       4/10     7/10     8/10
+ibrida          3/10     8/10    10/10
+-- unione       6/10    10/10    10/10
 ```
 
 Se non tornano, hai sbagliato qualcosa nei passi precedenti: il confronto

@@ -258,3 +258,34 @@ For each key present it makes a real, tiny call, and prints whether it
 answers, with which model and how much quota you have left. Missing keys:
 it skips them and tells you. It is the script you will run again every
 time "nothing works anymore": nine times out of ten it's a used-up quota.
+
+## 7. If you call the API by hand and get 403 {#7-se-chiami-lapi-a-mano-e-ottieni-403}
+
+The course scripts work because they use the `openai` or `httpx` library, which introduce
+themselves with a name (the *User-Agent*, the "who I am" every program declares to a
+website). If you write a call yourself with `urllib`, which introduces itself as
+`Python-urllib`, Groq answers **403 Forbidden** even with the right key: its abuse filter
+(Cloudflare) rejects anonymous programs. The fix is one line: declare a User-Agent.
+
+```python
+import json, os, urllib.request
+
+richiesta = urllib.request.Request(
+    "https://api.groq.com/openai/v1/models",
+    headers={"Authorization": f"Bearer {os.environ['GROQ_API_KEY']}",
+             "User-Agent": "memoria-ai-corso/1.0"},
+)
+modelli = json.load(urllib.request.urlopen(richiesta))
+print(len(modelli["data"]), "modelli disponibili")
+```
+
+With the right key it prints the number of models. With a wrong key the site answers
+**401 Unauthorized**: that is the right error to see, because it shows the request arrived
+and the problem is the key. A 403 means the request was stopped before it got there.
+
+## 8. If you use Google Colab {#8-se-usi-google-colab}
+
+In the course notebooks (the `notebooks/` folder) the key is never written in the code. In
+Colab: the **key** icon in the left bar, **Add new secret**, name `GROQ_API_KEY`, value your
+key, and switch on **Notebook access**. The notebook reads it with `google.colab.userdata`;
+if it is missing, it asks with `getpass` and does not display it.

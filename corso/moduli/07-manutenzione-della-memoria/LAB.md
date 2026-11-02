@@ -2,6 +2,9 @@
 
 **Durata: 78 minuti.**
 
+!!! tip "Provalo senza installare niente"
+    [Apri il laboratorio in Google Colab](https://colab.research.google.com/github/JoeBosi/rag-chatbot-course/blob/main/corso/notebooks/lab07-manutenzione.ipynb){ target="_blank" rel="noopener" }: un notebook con gli stessi comandi, da eseguire nel browser. Serve un account Google gratuito, e la chiave Groq gratuita che si imposta nei Segreti di Colab ([CHIAVI.md](../../CHIAVI.md#8-se-usi-google-colab)).
+
 Ti serve l'archivio del modulo 5 o 6 già digerito, e il gateway acceso.
 
 Già digerito vuol dire **tutto**. Prima di cominciare:
@@ -29,7 +32,7 @@ python memoria/quaderno.py chiedi "A che pressione devo tenere l'impianto della 
 Scrivi su un foglio la risposta. Poi guarda cosa aveva in mano il sistema:
 
 ```bash
-python memoria/quaderno.py chiedi "pressione impianto Termovex" --tipo pezzi
+python memoria/quaderno.py chiedi --pezzi "pressione impianto Termovex"
 ```
 
 Due domande a cui rispondere prima di andare avanti:
@@ -205,7 +208,7 @@ python memoria/manutenzione.py salva dati/backup
 3. se sei sul modulo 6 con PostgreSQL: `pg_dump`
 
 ```bash
-docker compose exec -T postgres pg_dump -U cognee cognee > dati/backup/registro.sql
+docker exec memoria-postgres pg_dump -U cognee cognee_db > dati/backup/registro.sql
 ```
 
 Controlla che i tre pezzi esistano e non siano vuoti:

@@ -92,7 +92,7 @@ if controlla("memoria/stima_quota.py esiste", percorso_stima.exists(),
     try:
         from stima_quota import stima
         corpus = sorted((RADICE / "progetto-finale" / "corpus").rglob("*.md"))
-        corpus = [p for p in corpus if p.name != "LEGGIMI.md"]
+        corpus = [p for p in corpus if not p.name.startswith("LEGGIMI")]
         risultato = stima(corpus)
         controlla(f"conta i documenti ({risultato['documenti']})",
                   risultato["documenti"] == 12,

@@ -256,3 +256,35 @@ Per ogni chiave presente fa una chiamata vera, minuscola, e stampa se
 risponde, con che modello e quanta quota ti resta. Chiavi assenti: le
 salta e te lo dice. È lo script che rilancerai ogni volta che «non
 funziona più niente»: nove volte su dieci è una quota finita.
+
+## 7. Se chiami l'API a mano e ottieni 403
+
+Gli script del corso funzionano perché usano la libreria `openai` o `httpx`, che si presentano
+con un nome (lo *User-Agent*, cioè «chi sono» che ogni programma dichiara a un sito).
+Se invece scrivi tu una chiamata con `urllib`, che si presenta come `Python-urllib`, Groq
+risponde **403 Forbidden** anche con la chiave giusta: il suo filtro anti-abusi (Cloudflare)
+respinge i programmi anonimi. Il rimedio è una riga: dichiarare un User-Agent.
+
+```python
+import json, os, urllib.request
+
+richiesta = urllib.request.Request(
+    "https://api.groq.com/openai/v1/models",
+    headers={"Authorization": f"Bearer {os.environ['GROQ_API_KEY']}",
+             "User-Agent": "memoria-ai-corso/1.0"},
+)
+modelli = json.load(urllib.request.urlopen(richiesta))
+print(len(modelli["data"]), "modelli disponibili")
+```
+
+Con la chiave giusta stampa il numero dei modelli. Con una chiave sbagliata il
+sito risponde **401 Unauthorized**: è l'errore giusto da vedere, perché dice che la
+richiesta è arrivata e che il problema è la chiave. Un 403 significa invece che la
+richiesta è stata fermata prima.
+
+## 8. Se usi Google Colab
+
+Nei notebook del corso (cartella `notebooks/`) la chiave non si scrive mai nel codice. In
+Colab: icona della **chiave** nella barra a sinistra, **Aggiungi nuovo segreto**, nome
+`GROQ_API_KEY`, valore la chiave, e attiva **Accesso da notebook**. Il notebook la legge con
+`google.colab.userdata`; se non c'è, te la chiede con `getpass` e non la mostra.

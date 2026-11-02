@@ -2,6 +2,9 @@
 
 **Duration: 84 minutes.**
 
+!!! tip "Try it without installing anything"
+    [Open the lab in Google Colab](https://colab.research.google.com/github/JoeBosi/rag-chatbot-course/blob/main/corso/notebooks/lab06-dove-vive-il-dato.ipynb){ target="_blank" rel="noopener" }: a notebook with the same commands, to run in your browser. It needs a free Google account, and the free Groq key, which you set in Colab Secrets ([CHIAVI.md](../../CHIAVI.md#8-se-usi-google-colab)). In Colab you try the part without Docker (step 1); PostgreSQL and pgvector are done on your own computer.
+
 By the end you will have the knowledge base on PostgreSQL with pgvector,
 the graph in Kuzu that you can really inspect, and a tool to look inside.
 
@@ -120,6 +123,16 @@ SQL
 
 (The comment means: the closest to "rasaerba", by cosine distance.)
 
+You must see these three rows, in this order:
+
+```text
+   testo    | distanza 
+------------+----------
+ rasaerba   |   0.0000
+ tagliaerba |   0.0071
+ caldaia    |   0.9901
+```
+
 «tagliaerba» (lawn mower) must come out very close and «caldaia»
 (boiler) far away. These are the vectors of module 3, in three
 dimensions instead of 384, inside a normal SQL query.
@@ -135,7 +148,7 @@ LIMIT 1;
 SQL
 ```
 
-Exact filter and similarity ordering, together. Then clean up:
+Exact filter and similarity ordering, together. The answer is one row: `tagliaerba`. Then clean up:
 
 ```bash
 docker exec memoria-postgres psql -U cognee -d cognee_db -c "DROP TABLE prova;"

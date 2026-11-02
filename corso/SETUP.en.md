@@ -76,12 +76,13 @@ packages; in that case 3.11 is fine too
 ## 2. The repository {#2-il-repository}
 
 ```bash
-git clone <indirizzo-del-repo> memoria-ai
-cd memoria-ai
+git clone https://github.com/JoeBosi/rag-chatbot-course.git memoria-ai
+cd memoria-ai/corso
 ```
 
 From here on, **you run every course command from this folder**. If a
-command says `python moduli/01-.../verifica.py`, you are in `memoria-ai`.
+command says `python moduli/01-.../verifica.py`, you are in `memoria-ai/corso`. In this
+course that folder is "the root of the repository".
 
 ## 3. The isolated environment {#3-lambiente-isolato}
 
@@ -303,7 +304,8 @@ Check that it really is:
 git check-ignore -v .env
 ```
 
-It must answer `.gitignore:1:.env	.env`. If it answers nothing, something
+It must answer with a line that ends in `.gitignore:1:.env	.env`
+(a path such as `corso/` may come before it). If it answers nothing, something
 is out of place: stop and fix it before you go on.
 
 ## 6. Dress rehearsal {#6-prova-generale}

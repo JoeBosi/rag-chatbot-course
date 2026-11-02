@@ -157,7 +157,7 @@ costruisce il grafo — fa, per ogni pezzo di testo:
 | embedding (locale, non consuma quota) | 0 |
 
 Quindi: **2 chiamate ogni pezzo di testo**, più la lunghezza del pezzo in
-token, due volte. Il corpus del corso (17.036 caratteri) spezzato in
+token, due volte. Il corpus del corso (17.080 caratteri) spezzato in
 pezzi da 1.000 caratteri fa **22 pezzi, 44 chiamate, circa 17.000
 token**. Sul piano gratuito di Groq sono **2,1 minuti di attesa
 forzata**, non due secondi. Nel laboratorio lo calcoli con uno script
