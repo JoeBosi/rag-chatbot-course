@@ -5,6 +5,10 @@
 !!! tip "Provalo senza installare niente"
     [Apri il laboratorio in Google Colab](https://colab.research.google.com/github/JoeBosi/rag-chatbot-course/blob/main/corso/notebooks/lab06-dove-vive-il-dato.ipynb){ target="_blank" rel="noopener" }: un notebook con gli stessi comandi, da eseguire nel browser. Serve un account Google gratuito, e la chiave Groq gratuita che si imposta nei Segreti di Colab ([CHIAVI.md](../../CHIAVI.md#8-se-usi-google-colab)). In Colab si prova la parte senza Docker (passo 1); PostgreSQL e pgvector si fanno sul tuo computer.
 
+**Cosa dovresti vedere.** Il notebook si apre in sola lettura, con le spiegazioni in italiano e in inglese e le celle di codice. Per eseguirle premi **Connect** e accedi con il tuo account Google: Colab non fa girare niente senza accesso.
+
+![Il notebook del laboratorio 6 aperto in Google Colab: titolo in italiano e in inglese, istruzioni e prima cella di codice](../../assets/screenshots/lab06-colab.png)
+
 Alla fine avrai l'archivio su PostgreSQL con pgvector, il grafo in Kuzu
 davvero ispezionabile, e uno strumento per guardarci dentro.
 

@@ -5,6 +5,10 @@
 !!! tip "Provalo senza installare niente"
     [Apri il laboratorio in Google Colab](https://colab.research.google.com/github/JoeBosi/rag-chatbot-course/blob/main/corso/notebooks/lab02-gateway-e-token.ipynb){ target="_blank" rel="noopener" }: un notebook con gli stessi comandi, da eseguire nel browser. Serve un account Google gratuito, e la chiave Groq gratuita che si imposta nei Segreti di Colab ([CHIAVI.md](../../CHIAVI.md#8-se-usi-google-colab)).
 
+**Cosa dovresti vedere.** Il notebook si apre in sola lettura, con le spiegazioni in italiano e in inglese e le celle di codice. Per eseguirle premi **Connect** e accedi con il tuo account Google: Colab non fa girare niente senza accesso.
+
+![Il notebook del laboratorio 2 aperto in Google Colab: titolo in italiano e in inglese, istruzioni e prima cella di codice](../../assets/screenshots/lab02-colab.png)
+
 Alla fine avrai un gateway che gira sul tuo computer, il tuo sistema che
 ci passa attraverso senza saperlo, e uno script che ti dice quanto costa
 un lavoro prima di lanciarlo.

@@ -5,6 +5,10 @@
 !!! tip "Provalo senza installare niente"
     [Apri il laboratorio in Google Colab](https://colab.research.google.com/github/JoeBosi/rag-chatbot-course/blob/main/corso/notebooks/lab03-spezzare-cercare-misurare.ipynb){ target="_blank" rel="noopener" }: un notebook con gli stessi comandi, da eseguire nel browser. Serve un account Google gratuito. Questo laboratorio non chiama mai il modello: non serve nessuna chiave.
 
+**Cosa dovresti vedere.** Il notebook si apre in sola lettura, con le spiegazioni in italiano e in inglese e le celle di codice. Per eseguirle premi **Connect** e accedi con il tuo account Google: Colab non fa girare niente senza accesso.
+
+![Il notebook del laboratorio 3 aperto in Google Colab: titolo in italiano e in inglese, istruzioni e prima cella di codice](../../assets/screenshots/lab03-colab.png)
+
 Alla fine avrai quattro pezzi nuovi del tuo sistema: `pezzi.py`,
 `lessicale.py`, `semantica.py`, `ibrida.py` — e, soprattutto, un modo per
 sapere se una modifica migliora le cose o le peggiora.
